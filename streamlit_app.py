@@ -1,7 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle as pk
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import MinMaxScaler
 
 st.title('Prediksi Harga Mobil Bekas UK')
 
@@ -22,12 +27,53 @@ df = df[(df['mpg'] < 85) & (df['mpg'] > 20)]
 df = df[df['engineSize'] < 6]
 st.dataframe(df)
 
+df['model'] = df['model'].str.lstrip()
+dfprep = df.copy()
+
+labeling = LabelEncoder()
+scaler = MinMaxScaler(copy = True, feature_range = (0,1))
+
+numerical_features = dfprep.select_dtypes(exclude=['object']).columns
+dfprep[numerical_features] = scaler.fit_transform(dfprep[numerical_features])
+
+kolomkategori = df.select_dtypes(include=['object']).columns.tolist()
+labeling.fit(pd.concat([df[col] for col in kolomkategori]))
+
+x = dfprep.drop('price', axis=1)
+y = dfprep['price']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+modelRandomForest = RandomForestRegressor()
+modelRandomForest.fit(x_train, y_train)
+
+y_pred_RandomForest = modelRandomForest.predict(x_test)
+
 with st.sidebar:
-  Status = st.selectbox('Status', (0, 1, 2, 3))
-  Kelamin = st.selectbox('Jenis kelamin', (0, 1))
-  Usia = st.number_input('Usia', value=None, placeholder="...")
-  Memiliki_Mobil = st.number_input('Jumlah mobil yang dimiliki', value=None, placeholder="...")
-  Penghasilan = st.number_input('penghasilan juta perthaun', value=None, placeholder="...")
-  data = {'Status': Status, 'Kelamin': Kelamin, 'Usia': Usia, 'Memiliki_Mobil': Memiliki_Mobil, 'Penghasilan': Penghasilan}
-  input_df = pd.DataFrame(data, index=[0])
-input_df
+  Make = st.selectbox('Make', df['Make'].unique())
+  model = st.selectbox('Model', df['model'].unique())
+  year = st.slider('Tahun Beli', df['year'].min(), df['year'].max())
+  transmission = st.selectbox('Transmisi', df['transmission'].unique())
+  fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique())
+  engineSize = st.slider('Ukuran Mesin', df['engineSize'].min(), df['engineSize'].max())
+  mileage = st.slider('Jarak Tempuh', df['mileage'].min(), df['mileage'].max())
+  mpg = st.slider('Kapasitas Bahan Bakar', df['mpg'].min(), df['mpg'].max())
+  tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
+  price = 0
+  data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
+new_data = pd.DataFrame(data, index=[0])
+if st.button('Predict'):
+  new_data_prep = new_data.copy()
+  numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
+  new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
+  numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
+  new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
+  for col in new_data_prep.select_dtypes(include=['object']):
+    new_data_prep[col] = labeling.transform(new_data_prep[col])
+  new_data_prep = new_data_prep.drop('price', axis=1)
+  y_pred_scaled = modelRandomForest.predict(new_data_prep)
+  new_data_prep.insert(2, 'price', y_pred_scaled)
+  numerical_features = new_data.select_dtypes(exclude=['object']).columns
+  new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
+  for col in new_data.select_dtypes(include=['object']):
+    new_data[col] = labeling.inverse_transform(new_data_prep[col])
+st.write(new_data['price'])
