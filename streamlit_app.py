@@ -65,5 +65,5 @@ new_data_prep = new_data_prep.drop('price', axis=1)
 
 
 if st.button('Prediksi'):
-  st.dataframe(new_data_prep)
+  st.dataframe(new_data)
   st.write('Prediksi Harga Mobil Bekas: ', prediksi)
