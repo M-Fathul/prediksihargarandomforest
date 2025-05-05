@@ -46,6 +46,8 @@ st.write(x_test.shape)
 st.write(y_test.shape)
 st.write(x_train.shape)
 st.write(y_train.shape)
+modelRandomForest = RandomForestRegressor()
+modelRandomForest.fit(x_train, y_train)
 
 with st.sidebar:
   Make = st.selectbox('Make', df['Make'].unique())
