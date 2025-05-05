@@ -59,21 +59,25 @@ with st.sidebar:
   mpg = st.slider('Kapasitas Bahan Bakar', df['mpg'].min(), df['mpg'].max())
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
+  prediksi = 0
+  
   data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
 new_data = pd.DataFrame(data, index=[0])
+new_data_prep = new_data.copy()
+numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
+new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
+numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
+new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
+for col in new_data_prep.select_dtypes(include=['object']):
+  new_data_prep[col] = labeling.transform(new_data_prep[col])
+new_data_prep = new_data_prep.drop('price', axis=1)
+
 if st.button('Predict'):
-  new_data_prep = new_data.copy()
-  numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
-  new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
-  numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
-  new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
-  for col in new_data_prep.select_dtypes(include=['object']):
-    new_data_prep[col] = labeling.transform(new_data_prep[col])
-  new_data_prep = new_data_prep.drop('price', axis=1)
   y_pred_scaled = modelRandomForest.predict(new_data_prep)
   new_data_prep.insert(2, 'price', y_pred_scaled)
   numerical_features = new_data.select_dtypes(exclude=['object']).columns
   new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
   for col in new_data.select_dtypes(include=['object']):
     new_data[col] = labeling.inverse_transform(new_data_prep[col])
-st.write(new_data['price'])
+  prediksi = round(new_data['price'])
+st.write(prediksi)
