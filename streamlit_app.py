@@ -39,6 +39,9 @@ dfprep[numerical_features] = scaler.fit_transform(dfprep[numerical_features])
 kolomkategori = df.select_dtypes(include=['object']).columns.tolist()
 labeling.fit(pd.concat([df[col] for col in kolomkategori]))
 
+x = dfprep.drop('price', axis=1)
+y = dfprep['price']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
 
 with st.sidebar:
@@ -65,5 +68,6 @@ new_data_prep = new_data_prep.drop('price', axis=1)
 
 
 if st.button('Prediksi'):
+  st.dataframe(new_data_prep)
   st.dataframe(new_data)
   st.write('Prediksi Harga Mobil Bekas: ', prediksi)
