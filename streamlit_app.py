@@ -7,14 +7,13 @@ st.title('Prediksi Harga Mobil Bekas UK')
 
 st.write('**Dataset yang digunakan**')
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
-  df
-  st.write('**features**')
-  X = df.drop(['Beli_Mobil', 'ID'], axis=1)
-  X
+st.write('**Fitur yang digunakan**')
+X = df.drop([''], axis=1)
+X
   
-  st.write('**Class**')
-  y = df.Beli_Mobil
-  y
+st.write('**Class**')
+y = df.Beli_Mobil
+y
 
 with st.sidebar:
   Status = st.selectbox('Status', (0, 1, 2, 3))
