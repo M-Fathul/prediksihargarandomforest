@@ -63,3 +63,4 @@ for col in new_data_prep.select_dtypes(include=['object']):
   new_data_prep[col] = labeling.transform(new_data_prep[col])
 new_data_prep = new_data_prep.drop('price', axis=1)
 
+st.dataframe(new_data_prep)
