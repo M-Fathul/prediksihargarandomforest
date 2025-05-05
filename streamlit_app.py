@@ -71,11 +71,11 @@ for col in new_data_prep.select_dtypes(include=['object']):
 new_data_prep = new_data_prep.drop('price', axis=1)
 
 if st.button('Predict'):
-  y_pred_scaled = modelRandomForest.predict(new_data_prep)
-  new_data_prep.insert(2, 'price', y_pred_scaled)
-  numerical_features = new_data.select_dtypes(exclude=['object']).columns
-  new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
-  for col in new_data.select_dtypes(include=['object']):
-    new_data[col] = labeling.inverse_transform(new_data_prep[col])
-  prediksi = round(new_data['price'])
+  # y_pred_scaled = modelRandomForest.predict(new_data_prep)
+  # new_data_prep.insert(2, 'price', y_pred_scaled)
+  # numerical_features = new_data.select_dtypes(exclude=['object']).columns
+  # new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
+  # for col in new_data.select_dtypes(include=['object']):
+  #   new_data[col] = labeling.inverse_transform(new_data_prep[col])
+  # prediksi = round(new_data['price'])
 st.write(prediksi)
