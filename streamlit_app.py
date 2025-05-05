@@ -42,7 +42,10 @@ labeling.fit(pd.concat([df[col] for col in kolomkategori]))
 x = dfprep.drop('price', axis=1)
 y = dfprep['price']
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
+st.write(string(x_test.shpape))
+st.write(string(y_test.shape))
+st.write(string(x_train.shape))
+st.write(string(y_train.shape))
 
 with st.sidebar:
   Make = st.selectbox('Make', df['Make'].unique())
