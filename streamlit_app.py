@@ -25,9 +25,9 @@ df = df[df['mileage'] < 200000]
 df = df[df['tax'] < 500]
 df = df[(df['mpg'] < 85) & (df['mpg'] > 20)]
 df = df[df['engineSize'] < 6]
-st.dataframe(df)
-
 df['model'] = df['model'].str.lstrip()
+
+st.dataframe(df)
 dfprep = df.copy()
 
 labeling = LabelEncoder()
@@ -39,14 +39,7 @@ dfprep[numerical_features] = scaler.fit_transform(dfprep[numerical_features])
 kolomkategori = df.select_dtypes(include=['object']).columns.tolist()
 labeling.fit(pd.concat([df[col] for col in kolomkategori]))
 
-x = dfprep.drop('price', axis=1)
-y = dfprep['price']
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-modelRandomForest = RandomForestRegressor()
-modelRandomForest.fit(x_train, y_train)
-
-y_pred_RandomForest = modelRandomForest.predict(x_test)
 
 with st.sidebar:
   Make = st.selectbox('Make', df['Make'].unique())
