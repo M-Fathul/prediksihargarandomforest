@@ -72,9 +72,12 @@ new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_fea
 for col in new_data_prep.select_dtypes(include=['object']):
   new_data_prep[col] = labeling.transform(new_data_prep[col])
 new_data_prep = new_data_prep.drop('price', axis=1)
-
+st.dataframe(new_data)
 
 if st.button('Prediksi'):
-  st.dataframe(new_data_prep)
-  st.dataframe(new_data)
-  st.write('Prediksi Harga Mobil Bekas: ', prediksi)
+  y_pred_scaled = modelRandomForest.predict(new_data_prep)
+  new_data_prep.insert(2, 'price', y_pred_scaled)
+  new_data['price'] = scaler.inverse_transform(new_data_prep['price'])
+  prediksi = int(new_data['price'][0])
+
+  st.write('Prediksi Harga Mobil Bekas: ', + str(prediksi))
