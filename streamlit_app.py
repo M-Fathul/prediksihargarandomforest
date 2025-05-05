@@ -5,15 +5,22 @@ import pickle as pk
 
 st.title('Prediksi Harga Mobil Bekas UK')
 
-st.write('**Dataset yang digunakan**')
+st.header('**Dataset yang digunakan**')
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
-st.write('**Fitur yang digunakan**')
-X = df.drop([''], axis=1)
-X
-  
-st.write('**Class**')
-y = df.Beli_Mobil
-y
+
+df.dropna(inplace=True)
+df = df[df['engineSize'] != 0]
+df = df[df['tax'] != 0]
+df.drop_duplicates(inplace=True)
+
+df = df[df['transmission'] != 'Other']
+df = df[(df['fuelType'] != 'Other') & (df['fuelType'] != 'Electric')]
+df = df[df['year'] > 2000]
+df = df[df['mileage'] < 200000]
+df = df[df['tax'] < 500]
+df = df[(df['mpg'] < 85) & (df['mpg'] > 20)]
+df = df[df['engineSize'] < 6]
+st.dataframe(df)
 
 with st.sidebar:
   Status = st.selectbox('Status', (0, 1, 2, 3))
