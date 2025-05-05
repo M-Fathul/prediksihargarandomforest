@@ -64,3 +64,6 @@ for col in new_data_prep.select_dtypes(include=['object']):
 new_data_prep = new_data_prep.drop('price', axis=1)
 
 st.dataframe(new_data_prep)
+
+if st.button('Prediksi'):
+  st.write('Prediksi Harga Mobil Bekas: ', prediksi)
