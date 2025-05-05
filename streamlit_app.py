@@ -6,7 +6,7 @@ import pickle as pk
 st.title('Prediksi Harga Mobil Bekas UK')
 
 st.write('**Dataset yang digunakan**')
-df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv'), sep
+df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
   df
   st.write('**features**')
   X = df.drop(['Beli_Mobil', 'ID'], axis=1)
