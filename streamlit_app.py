@@ -38,6 +38,8 @@ dfprep[numerical_features] = scaler.fit_transform(dfprep[numerical_features])
 
 kolomkategori = df.select_dtypes(include=['object']).columns.tolist()
 labeling.fit(pd.concat([df[col] for col in kolomkategori]))
+for col in kolomkategori:
+  dfprep[col] = labeling.transform(dfprep[col])
 
 x = dfprep.drop('price', axis=1)
 y = dfprep['price']
