@@ -78,4 +78,5 @@ if st.button('Predict'):
   # for col in new_data.select_dtypes(include=['object']):
   #   new_data[col] = labeling.inverse_transform(new_data_prep[col])
   # prediksi = round(new_data['price'])
-st.write(prediksi)
+
+# st.write(prediksi)
