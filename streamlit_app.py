@@ -42,7 +42,7 @@ labeling.fit(pd.concat([df[col] for col in kolomkategori]))
 x = dfprep.drop('price', axis=1)
 y = dfprep['price']
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-st.write(x_test.shpape)
+st.write(x_test.shape)
 st.write(y_test.shape)
 st.write(x_train.shape)
 st.write(y_train.shape)
