@@ -44,10 +44,6 @@ for col in kolomkategori:
 x = dfprep.drop('price', axis=1)
 y = dfprep['price']
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-st.write(x_test.shape)
-st.write(y_test.shape)
-st.write(x_train.shape)
-st.write(y_train.shape)
 modelRandomForest = RandomForestRegressor()
 modelRandomForest.fit(x_train, y_train)
 
@@ -77,7 +73,10 @@ st.dataframe(new_data)
 if st.button('Prediksi'):
   y_pred_scaled = modelRandomForest.predict(new_data_prep)
   new_data_prep.insert(2, 'price', y_pred_scaled)
-  new_data['price'] = scaler.inverse_transform(new_data_prep['price'])
-  prediksi = int(new_data['price'][0])
+  numerical_features = new_data.select_dtypes(exclude=['object']).columns
+  new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
+  for col in new_data.select_dtypes(include=['object']):
+    new_data[col] = labeling.inverse_transform(new_data[col])
+  prediksi = int(new_data['price'])
 
   st.write('Prediksi Harga Mobil Bekas: ', + str(prediksi))
