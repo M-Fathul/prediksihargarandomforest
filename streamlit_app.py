@@ -87,7 +87,5 @@ with st.sidebar:
     new_data_prep.insert(2, 'price', y_pred_scaled)
     numerical_features = new_data.select_dtypes(exclude=['object']).columns
     new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
-    for col in new_data.select_dtypes(include=['object']):
-      new_data[col] = labeling.inverse_transform(new_data[col])
     prediksi = int(new_data['price'])
     st.write('Prediksi Harga Mobil Bekas: ', + str(prediksi))
