@@ -49,7 +49,8 @@ modelRandomForest.fit(x_train, y_train)
 
 with st.sidebar:
   Make = st.selectbox('Make', df['Make'].unique())
-  model = st.selectbox('Model', df['model'].unique())
+  filtered_models = df[df['Make'] == Make]['model'].unique()
+  model = st.selectbox('Model', filtered_models)
   year = st.slider('Tahun Beli', df['year'].min(), df['year'].max())
   transmission = st.selectbox('Transmisi', df['transmission'].unique())
   fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique())
@@ -59,9 +60,9 @@ with st.sidebar:
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
   prediksi = 0
-  st.button('set spesifikasi mobil', key=1)
+  st.button('set spesifikasi mobil', key=set)
   
-if 1:
+if set.is_clicked():
   new_data = pd.DataFrame({
       'Make': [Make],
       'model': [model],
