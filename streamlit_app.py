@@ -60,8 +60,6 @@ with st.sidebar:
   price = 0
   prediksi = 0
   st.button('set spesifikasi mobil')
-    data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
-    new_data = pd.DataFrame(data, index=[0])
   
 if st.button('set spesifikasi mobil'):
   data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
