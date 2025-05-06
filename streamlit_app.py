@@ -12,7 +12,7 @@ st.title('Prediksi Harga Mobil Bekas UK')
 
 st.header('**Dataset yang digunakan**')
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
-
+st.dataframe(df)
 
 with st.sidebar:
   if 'Make' not in st.session_state:
@@ -45,8 +45,7 @@ with st.sidebar:
     df = df[(df['mpg'] < 85) & (df['mpg'] > 20)]
     df = df[df['engineSize'] < 6]
     df['model'] = df['model'].str.lstrip()
-
-    st.dataframe(df)
+    
     dfprep = df.copy()
 
     labeling = LabelEncoder()
