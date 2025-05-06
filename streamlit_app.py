@@ -59,18 +59,22 @@ with st.sidebar:
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
   prediksi = 0
+  st.button('set spesifikasi mobil')
+    data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
+    new_data = pd.DataFrame(data, index=[0])
   
+if st.button('set spesifikasi mobil'):
   data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
-new_data = pd.DataFrame(data, index=[0])
-new_data_prep = new_data.copy()
-numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
-new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
-for col in new_data_prep.select_dtypes(include=['object']):
-  new_data_prep[col] = labeling.transform(new_data_prep[col])
-new_data_prep = new_data_prep.drop('price', axis=1)
-st.dataframe(new_data)
+  new_data = pd.DataFrame(data, index=[0])
+  st.dataframe(new_data)
 
 if st.button('Prediksi'):
+  new_data_prep = new_data.copy()
+  numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
+  new_data_prep[numerical_features] = scaler.transform(new_data_prep[numerical_features])
+  for col in new_data_prep.select_dtypes(include=['object']):
+    new_data_prep[col] = labeling.transform(new_data_prep[col])
+  new_data_prep = new_data_prep.drop('price', axis=1)
   y_pred_scaled = modelRandomForest.predict(new_data_prep)
   new_data_prep.insert(2, 'price', y_pred_scaled)
   numerical_features = new_data.select_dtypes(exclude=['object']).columns
