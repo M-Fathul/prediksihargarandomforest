@@ -88,4 +88,4 @@ with st.sidebar:
     numerical_features = new_data.select_dtypes(exclude=['object']).columns
     new_data[numerical_features] = scaler.inverse_transform(new_data_prep[numerical_features])
     prediksi = int(new_data['price'])
-    st.write('Prediksi Harga Mobil Bekas: ', + str(prediksi))
+    st.write('Prediksi Harga Mobil Bekas: ', + prediksi)
