@@ -59,7 +59,7 @@ with st.sidebar:
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
   prediksi = 0
-  st.button('set spesifikasi mobil' key=1)
+  st.button('set spesifikasi mobil', key=1)
   
 if 1:
   new_data = pd.DataFrame({
