@@ -66,7 +66,7 @@ with st.sidebar:
   prediksi = 0
   if st.button('prediksi harga'):
     new_data = pd.DataFrame({
-      'model': [model],
+      'model': [st.session_state.model],
       'year': [year],
       'price': [price],
       'transmission': [transmission],
@@ -75,7 +75,7 @@ with st.sidebar:
       'tax': [tax],
       'mpg': [mpg],
       'engineSize': [engineSize],
-      'Make': [Make],
+      'Make': [st.session_state.Make],
     })
     new_data_prep = new_data.copy()
     numerical_features = new_data_prep.select_dtypes(exclude=['object']).columns
