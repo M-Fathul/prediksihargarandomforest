@@ -48,9 +48,13 @@ modelRandomForest = RandomForestRegressor()
 modelRandomForest.fit(x_train, y_train)
 
 with st.sidebar:
-  Make = st.selectbox('Make', df['Make'].unique())
-  filtered_models = df[df['Make'] == Make]['model'].unique()
-  model = st.selectbox('Model', filtered_models)
+  if 'Make' not in st.session_state:
+    st.session_state.Make = df['Make'].unique()[0]
+  if 'model' not in st.session_state:
+    st.session_state.model = df[df['Make'] == st.session_state.Make]['model'].unique()[0]
+  st.session_state.Make = st.selectbox('Make', df['Make'].unique(), key='Make_select')
+  filtered_models = df[df['Make'] == st.session_state.Make]['model'].unique()
+  st.session_state.model = st.selectbox('Model', filtered_models, key='model_select')
   year = st.slider('Tahun Beli', df['year'].min(), df['year'].max())
   transmission = st.selectbox('Transmisi', df['transmission'].unique())
   fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique())
@@ -60,23 +64,12 @@ with st.sidebar:
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
   prediksi = 0
-  st.button('set spesifikasi mobil', key=set)
+  set_spec_button = st.button('set spesifikasi mobil', key='setmobil')
   
-if set.is_clicked():
-  new_data = pd.DataFrame({
-      'Make': [Make],
-      'model': [model],
-      'year': [year],
-      'transmission': [transmission],
-      'fuelType': [fuelType],
-      'engineSize': [engineSize],
-      'mileage': [mileage],
-      'mpg': [mpg],
-      'tax': [tax],
-      'price': [price]
-  })
+if set_spec_button.is_clicked():
+  data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
+  new_data = pd.DataFrame(data, index=[0])
   st.dataframe(new_data)
-  
 
 if st.button('Prediksi'):
   new_data_prep = new_data.copy()
