@@ -55,13 +55,13 @@ with st.sidebar:
   st.session_state.Make = st.selectbox('Make', df['Make'].unique(), key='Make_select')
   filtered_models = df[df['Make'] == st.session_state.Make]['model'].unique()
   st.session_state.model = st.selectbox('Model', filtered_models, key='model_select')
-  year = st.slider('Tahun Beli', df['year'].min(), df['year'].max(), default=2017)
-  transmission = st.selectbox('Transmisi', df['transmission'].unique(), default='Manual')
-  fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique(), default='Petrol')
-  engineSize = st.slider('Ukuran Mesin', df['engineSize'].min(), df['engineSize'].max(), default=1.4)
-  mileage = st.slider('Jarak Tempuh', df['mileage'].min(), df['mileage'].max(), default=15735)
-  mpg = st.slider('Kapasitas Bahan Bakar', df['mpg'].min(), df['mpg'].max(), default=55.4)
-  tax = st.slider('Pajak', df['tax'].min(), df['tax'].max(), default=150.0)
+  year = st.slider('Tahun Beli', df['year'].min(), df['year'].max(), placeholder=2017)
+  transmission = st.selectbox('Transmisi', df['transmission'].unique(), placeholder='Manual')
+  fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique(), placeholder='Petrol')
+  engineSize = st.slider('Ukuran Mesin', df['engineSize'].min(), df['engineSize'].max(), placeholder=1.4)
+  mileage = st.slider('Jarak Tempuh', df['mileage'].min(), df['mileage'].max(), placeholder=15735)
+  mpg = st.slider('Kapasitas Bahan Bakar', df['mpg'].min(), df['mpg'].max(), placeholder=55.4)
+  tax = st.slider('Pajak', df['tax'].min(), df['tax'].max(), placeholder=150.0)
   price = 0
   prediksi = 0
   if st.button('prediksi harga'):
