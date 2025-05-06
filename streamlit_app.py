@@ -59,12 +59,23 @@ with st.sidebar:
   tax = st.slider('Pajak', df['tax'].min(), df['tax'].max())
   price = 0
   prediksi = 0
-  st.button('set spesifikasi mobil')
+  st.button('set spesifikasi mobil' key=1)
   
-if st.button('set spesifikasi mobil'):
-  data = {'model': model, 'year': year, 'price': price, 'transmission': transmission, 'mileage': mileage, 'fuelType': fuelType, 'tax': tax, 'mpg': mpg, 'engineSize': engineSize, 'Make': Make,}
-  new_data = pd.DataFrame(data, index=[0])
+if 1:
+  new_data = pd.DataFrame({
+      'Make': [Make],
+      'model': [model],
+      'year': [year],
+      'transmission': [transmission],
+      'fuelType': [fuelType],
+      'engineSize': [engineSize],
+      'mileage': [mileage],
+      'mpg': [mpg],
+      'tax': [tax],
+      'price': [price]
+  })
   st.dataframe(new_data)
+  
 
 if st.button('Prediksi'):
   new_data_prep = new_data.copy()
