@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 st.title('Prediksi Harga Mobil Bekas UK')
 st.header('**Tentang Aplikasi**')
-st.markdown('Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK')
+st.markdown('Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui penelitian ini, diharapkan dapat ditemukan model yang dapat memberikan prediksi harga yang lebih akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual.Selain itu, penelitian ini juga berfokus pada analisis faktor-faktor yang paling berpengaruh dalam menentukan harga mobil bekas. Dengan mengetahui faktor-faktor utama yang mempengaruhi harga, penelitian ini dapat memberikan wawasan yang lebih dalam mengenai dinamika pasar mobil bekas di Inggris. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.')
 
 st.header('**Dataset yang digunakan**')
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
