@@ -9,9 +9,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 
 st.title('Prediksi Harga Mobil Bekas UK')
+st.header('**Tentang Aplikasi**')
+st.markdown('Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK')
 
 st.header('**Dataset yang digunakan**')
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
+
+st.write("")
 
 df.dropna(inplace=True)
 df = df[df['engineSize'] != 0]
