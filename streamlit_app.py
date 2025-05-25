@@ -8,48 +8,49 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 
+st.set_page_config(
+    page_title="Prediksi Harga Mobil Bekas UK",
+    page_icon="🚘",
+    layout="wide"
+)
+
 st.title('Prediksi Harga Mobil Bekas UK')
 st.header('**Tentang Aplikasi**')
-st.markdown('Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui penelitian ini, diharapkan dapat ditemukan model yang dapat memberikan prediksi harga yang lebih akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual.Selain itu, penelitian ini juga berfokus pada analisis faktor-faktor yang paling berpengaruh dalam menentukan harga mobil bekas. Dengan mengetahui faktor-faktor utama yang mempengaruhi harga, penelitian ini dapat memberikan wawasan yang lebih dalam mengenai dinamika pasar mobil bekas di Inggris. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.')
+st.write("""
+    Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar.
 
-st.header('**Dataset yang digunakan**')
+    Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
+    """)
+
+st.header('**Pengembangan Aplikasi**')
+st.write("""
+     Dataset ini berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
+     brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
+     model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
+     year         : Tahun produksi mobil.
+     price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.
+     transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).
+     mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.
+     fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
+     tax          : Pajak jalan tahunan dalam Poundsterling.
+     mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
+     engineSize   : Ukuran mesin mobil dalam liter.
+    """)
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
+st.write("""
+     Dataset ini berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
+     brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
+     model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
+     year         : Tahun produksi mobil.
+     price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.
+     transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).
+     mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.
+     fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
+     tax          : Pajak jalan tahunan dalam Poundsterling.
+     mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
+     engineSize   : Ukuran mesin mobil dalam liter.
+    """)
 
-st.write("")
-
-df.dropna(inplace=True)
-df = df[df['engineSize'] != 0]
-df = df[df['tax'] != 0]
-df.drop_duplicates(inplace=True)
-
-df = df[df['transmission'] != 'Other']
-df = df[(df['fuelType'] != 'Other') & (df['fuelType'] != 'Electric')]
-df = df[df['year'] > 2000]
-df = df[df['mileage'] < 200000]
-df = df[df['tax'] < 500]
-df = df[(df['mpg'] < 85) & (df['mpg'] > 20)]
-df = df[df['engineSize'] < 6]
-df['model'] = df['model'].str.lstrip()
-
-st.dataframe(df)
-dfprep = df.copy()
-
-labeling = LabelEncoder()
-scaler = MinMaxScaler(copy = True, feature_range = (0,1))
-
-numerical_features = dfprep.select_dtypes(exclude=['object']).columns
-dfprep[numerical_features] = scaler.fit_transform(dfprep[numerical_features])
-
-kolomkategori = df.select_dtypes(include=['object']).columns.tolist()
-labeling.fit(pd.concat([df[col] for col in kolomkategori]))
-for col in kolomkategori:
-  dfprep[col] = labeling.transform(dfprep[col])
-
-x = dfprep.drop('price', axis=1)
-y = dfprep['price']
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-modelRandomForest = RandomForestRegressor()
-modelRandomForest.fit(x_train, y_train)
 
 with st.sidebar:
   if 'Make' not in st.session_state:
