@@ -46,17 +46,13 @@ st.subheader("Informasi Dataset")
 st.metric("Jumlah Data", df.shape[0])
 col2, col3 = st.columns(2)
 with col2:
-  labelobjek = "Tipe Data Objek"
-  kolomobjek = ":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]"
   st.markdown(
-    f'<div style="text-align: center;">{labelobjek}</div><div style="text-align: center;">{kolomobjek}</div>',
+    f'<div style="text-align: center;">Tipe Data Objek</div><div style="text-align: center;">{st.badge(Make)} {st.badge(model)} {st.badge(transmission)} {st.badge(fuelType)}</div>',
     unsafe_allow_html=True
   )
 with col3:
-  labelnumerik = "Tipe Data Numerik"
-  kolomnumerik = ":green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]"
   st.markdown(
-    f'<div style="text-align: center;">{labelnumerik}</div><div style="text-align: center;">{kolomnumerik}</div>',
+    f'<div style="text-align: center;">Tipe Data Numerik</div><div style="text-align: center;">{st.badge("year")} {st.badge("price")} {st.badge("mileage")} {st.badge("tax")} {st.badge("mpg")} {st.badge("engineSize")}</div>',
     unsafe_allow_html=True
   )
 
