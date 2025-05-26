@@ -29,24 +29,41 @@ st.write("""
     """)
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
 st.dataframe(df)
-st.write("""
+st.text("""
     Berikut penjelasan fitur yanga ada pada Dataset:
-    Make         : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai). 
-    model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).  
-    year         : Tahun produksi mobil.  
-    price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.    
-    transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).     
-    mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
-    fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).    
-    tax          : Pajak jalan tahunan dalam Poundsterling.
-    mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
-    engineSize   : Ukuran mesin mobil dalam liter.
+    \nMake         : Merek mobil 
+    \nmodel        : Model spesifik dari merek tersebut  
+    \nyear         : Tahun produksi mobil.  
+    \nprice        : Harga jual mobil, dalam Poundsterling.    
+    \ntransmission : Tipe transmisi
+    \nmileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
+    \nfuelType     : Jenis bahan bakar.    
+    \ntax          : Pajak jalan tahunan dalam Poundsterling.
+    \nmpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
+    \nengineSize   : Ukuran mesin mobil dalam liter.
     """)
-st.write("""
-    Pasar mobil bekas di Inggris merupakan salah satu pasar yang sangat besar dan dinamis. Setiap tahun, ribuan mobil bekas diperdagangkan, baik melalui dealer mobil, lelang, maupun secara langsung antara penjual dan pembeli. Namun, salah satu tantangan terbesar yang dihadapi oleh konsumen dan penjual dalam pasar ini adalah penentuan harga yang adil dan realistis. seringkali penentuan harga mobil bekas dilakukan secara subjektif dan berdasarkan pengalaman atau intuisi, yang tentu saja dapat menghasilkan harga yang tidak akurat. Kondisi ini sering kali merugikan pembeli yang ingin mendapatkan harga yang wajar, atau penjual yang ingin menjual mobil mereka dengan harga yang optimal. Oleh karena itu, diperlukan sebuah metode yang lebih objektif dan sistematis untuk memprediksi harga mobil bekas berdasarkan data yang ada
-    Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
-    """)
-
+st.subheader("Informasi Dataset")
+col1, col2, col3 = st.columns(3)
+with col1:
+  st.metric("Jumlah Data", df.shape[0])
+with col2:
+  st.text("""
+  Tipe Data Objek:
+  \nMake         : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai). 
+  \nmodel        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).  
+  \ntransmission : Tipe transmisi (Manual, Automatic, Semi-Auto).     
+  \nfuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
+  """)
+with col3:
+  st.text("""
+  Tipe Data Numerik:
+  \nyear         : Tahun produksi mobil.  
+  \nprice        : Harga jual mobil, dalam Poundsterling.    
+  \nmileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
+  \ntax          : Pajak jalan tahunan dalam Poundsterling.
+  \nmpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
+  \nengineSize   : Ukuran mesin mobil dalam liter.
+  """)
 
 
 
