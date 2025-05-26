@@ -47,13 +47,7 @@ st.write("""
     Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
     """)
 st.subheader("Informasi Dataset")
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric("Jumlah Data", df.shape[0])
-with col2:
-    st.metric("Jumlah Data", df.shape[0])
-with col3:
-    st.metric("Jumlah Data", df.shape[0])
+st.metric("Jumlah Data", df.shape[0])
 
 
 
