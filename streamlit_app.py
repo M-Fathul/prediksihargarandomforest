@@ -47,7 +47,7 @@ st.metric("Jumlah Data", df.shape[0])
 col2, col3 = st.columns(2)
 with col2:
   st.markdown(
-    f'<div style="text-align: center;">Tipe Data Objek</div><div style="text-align: center;">{st.badge(Make)} {st.badge(model)} {st.badge(transmission)} {st.badge(fuelType)}</div>',
+    f'<div style="text-align: center;">Tipe Data Objek</div><div style="text-align: center;">{st.badge("Make")} {st.badge("model")} {st.badge("transmission")} {st.badge("fuelType")}</div>',
     unsafe_allow_html=True
   )
 with col3:
