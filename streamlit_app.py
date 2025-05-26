@@ -32,15 +32,25 @@ df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/hea
 st.dataframe(df)
 st.write("""
      Berikut penjelasan fitur yanga ada pada Dataset:
+     
      brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
+     
      model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
+     
      year         : Tahun produksi mobil.
+     
      price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.
+     
      transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).
+     
      mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.
+     
      fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
+     
      tax          : Pajak jalan tahunan dalam Poundsterling.
+     
      mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
+     
      engineSize   : Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
