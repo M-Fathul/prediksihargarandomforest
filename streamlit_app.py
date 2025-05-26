@@ -43,23 +43,19 @@ with st.expander("Dataset"):
     engineSize   : Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
-st.metric("Jumlah Data", df.shape[0])
-col2, col3 = st.columns(2)
+col2, col3, col4 = st.columns(3)
 with col2:
-  st.markdown(
-    '<div style="text-align: center;">Tipe Data Objek</div>',
-    unsafe_allow_html=True
-  )
-  st.markdown(":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]", unsafe_allow_html=True
-  )
+  st.markdown("""
+  Tipe Data Objek:
+  :green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]
+  """)
 with col3:
-  st.markdown(
-    '<div style="text-align: center;">Tipe Data Numerik</div>',
-    unsafe_allow_html=True
-  )
-  st.markdown(":green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]", unsafe_allow_html=True
-  )
-
+  st.markdown("""
+  Tipe Data Numerik:
+  :green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]
+  """)
+with col4:
+  st.metric("Jumlah Data", df.shape[0])
 
 
 with st.sidebar:
