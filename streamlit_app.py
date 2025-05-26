@@ -51,9 +51,9 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Jumlah Data", df.shape[0])
 with col2:
-    st.metric("Tipe Data Objek", df.select_dtypes(include=['object']).columns)
+
 with col3:
-    st.metric("Tipe Data Numerik", df.select_dtypes(exclude=['object']).columns)
+
 
 
 
