@@ -31,36 +31,26 @@ st.write("""
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
 st.dataframe(df)
 st.write("""
-     Berikut penjelasan fitur yanga ada pada Dataset:
-     
-     brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
-     
-     model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
-     
-     year         : Tahun produksi mobil.
-     
-     price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.
-     
-     transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).
-     
-     mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.
-     
-     fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
-     
-     tax          : Pajak jalan tahunan dalam Poundsterling.
-     
-     mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
-     
-     engineSize   : Ukuran mesin mobil dalam liter.
+    Berikut penjelasan fitur yanga ada pada Dataset:
+    Make         : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai). 
+    model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).  
+    year         : Tahun produksi mobil.  
+    price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.    
+    transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).     
+    mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
+    fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).    
+    tax          : Pajak jalan tahunan dalam Poundsterling.
+    mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
+    engineSize   : Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Jumlah Data", df.shape[0])
 with col2:
-    st.metric("Pasien Diabetes", df[df['diabetes'] == 1].shape[0])
+    st.metric("Tipe Data Objek", df.select_dtypes(include=['object']).columns)
 with col3:
-    st.metric("Pasien Non-Diabetes", df[df['diabetes'] == 0].shape[0])
+    st.metric("Tipe Data Numerik", df.select_dtypes(exclude=['object']).columns)
 
 
 
