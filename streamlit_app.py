@@ -46,7 +46,7 @@ st.subheader("Informasi Dataset")
 st.metric("Jumlah Data", df.shape[0])
 col2, col3 = st.columns(2)
 with col2:
-  labelojek = "Tipe Data Objek"
+  labelobjek = "Tipe Data Objek"
   kolomobjek = ":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]"
   st.markdown(
     f'<div style="text-align: center;">{labelobjek}</div><div style="text-align: center;">{kolomobjek}</div>',
