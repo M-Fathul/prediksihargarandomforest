@@ -29,7 +29,7 @@ st.write("""
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
 with st.expander("Dataset"):
   st.dataframe(df)
-  st.write("""
+st.write("""
     Berikut penjelasan fitur yanga ada pada Dataset:
     Make         : Merek mobil 
     model        : Model spesifik dari merek tersebut  
