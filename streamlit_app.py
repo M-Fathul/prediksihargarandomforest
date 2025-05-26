@@ -29,18 +29,8 @@ st.write("""
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
 with st.expander("Dataset"):
   st.dataframe(df)
-st.write("""
-    Berikut penjelasan fitur yanga ada pada Dataset:
-    Make         : Merek mobil 
-    model        : Model spesifik dari merek tersebut  
-    year         : Tahun produksi mobil.  
-    price        : Harga jual mobil, dalam Poundsterling.    
-    transmission : Tipe transmisi
-    mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
-    fuelType     : Jenis bahan bakar.    
-    tax          : Pajak jalan tahunan dalam Poundsterling.
-    mpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
-    engineSize   : Ukuran mesin mobil dalam liter.
+st.text("""
+    Berikut penjelasan fitur yanga ada pada Dataset:\nMake\t: Merek mobil \nmodel\t: Model spesifik dari merek tersebut \nyear\t: Tahun produksi mobil.\nprice\t: Harga jual mobil, dalam Poundsterling.\ntransmission\t: Tipe transmisi\nmileage\t: Jarak tempuh mobil, kemungkinan dalam satuan miles.\nfuelType\t: Jenis bahan bakar.\ntax\t: Pajak jalan tahunan dalam Poundsterling.\nmpg\t: Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).\nengineSize\t: Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
 col2, col3, col4 = st.columns(3)
