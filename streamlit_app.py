@@ -17,28 +17,21 @@ st.set_page_config(
 st.title('Prediksi Harga Mobil Bekas UK')
 st.header('**Tentang Aplikasi**')
 st.write("""
+    Pasar mobil bekas di Inggris merupakan salah satu pasar yang sangat besar dan dinamis. Setiap tahun, ribuan mobil bekas diperdagangkan, baik melalui dealer mobil, lelang, maupun secara langsung antara penjual dan pembeli. Namun, salah satu tantangan terbesar yang dihadapi oleh konsumen dan penjual dalam pasar ini adalah penentuan harga yang adil dan realistis. seringkali penentuan harga mobil bekas dilakukan secara subjektif dan berdasarkan pengalaman atau intuisi, yang tentu saja dapat menghasilkan harga yang tidak akurat.
+    Kondisi ini sering kali merugikan pembeli yang ingin mendapatkan harga yang wajar, atau penjual yang ingin menjual mobil mereka dengan harga yang optimal. Oleh karena itu, diperlukan sebuah metode yang lebih objektif dan sistematis untuk memprediksi harga mobil bekas berdasarkan data yang ada
+    
     Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar.
-
     Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
     """)
-
+st.divider()
 st.header('**Pengembangan Aplikasi**')
 st.write("""
-     Dataset ini berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
-     brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
-     model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
-     year         : Tahun produksi mobil.
-     price        : Harga jual mobil, kemungkinan dalam Poundsterling (berdasarkan deskripsi dataset UK). Ini adalah variabel target yang ingin Anda prediksi.
-     transmission : Tipe transmisi (Manual, Automatic, Semi-Auto).
-     mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.
-     fuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
-     tax          : Pajak jalan tahunan dalam Poundsterling.
-     mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
-     engineSize   : Ukuran mesin mobil dalam liter.
+     Pada aplkasi ini terdapat model dengan metode regresi dengan algoritma Random Forest, yang dimana model tersebut dilatih menggunakan dataset yang berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
     """)
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
+st.dataframe(df)
 st.write("""
-     Dataset ini berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
+     Berikut penjelasan fitur yanga ada pada Dataset:
      brand        : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai).
      model        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).
      year         : Tahun produksi mobil.
@@ -50,6 +43,15 @@ st.write("""
      mpg          : Miles per gallon (efisiensi konsumsi bahan bakar).
      engineSize   : Ukuran mesin mobil dalam liter.
     """)
+st.subheader("Informasi Dataset")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric("Jumlah Data", df.shape[0])
+with col2:
+    st.metric("Pasien Diabetes", df[df['diabetes'] == 1].shape[0])
+with col3:
+    st.metric("Pasien Non-Diabetes", df[df['diabetes'] == 0].shape[0])
+
 
 
 with st.sidebar:
