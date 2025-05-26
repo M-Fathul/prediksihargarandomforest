@@ -17,53 +17,44 @@ st.set_page_config(
 st.title('Prediksi Harga Mobil Bekas UK')
 st.header('**Tentang Aplikasi**')
 st.write("""
-    Pasar mobil bekas di Inggris merupakan salah satu pasar yang sangat besar dan dinamis. Setiap tahun, ribuan mobil bekas diperdagangkan, baik melalui dealer mobil, lelang, maupun secara langsung antara penjual dan pembeli. Namun, salah satu tantangan terbesar yang dihadapi oleh konsumen dan penjual dalam pasar ini adalah penentuan harga yang adil dan realistis. seringkali penentuan harga mobil bekas dilakukan secara subjektif dan berdasarkan pengalaman atau intuisi, yang tentu saja dapat menghasilkan harga yang tidak akurat.
-    Kondisi ini sering kali merugikan pembeli yang ingin mendapatkan harga yang wajar, atau penjual yang ingin menjual mobil mereka dengan harga yang optimal. Oleh karena itu, diperlukan sebuah metode yang lebih objektif dan sistematis untuk memprediksi harga mobil bekas berdasarkan data yang ada
-    Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar.
-    Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
+    Pasar mobil bekas di Inggris merupakan salah satu pasar yang sangat besar dan dinamis. Setiap tahun, ribuan mobil bekas diperdagangkan, baik melalui dealer mobil, lelang, maupun secara langsung antara penjual dan pembeli. Namun, salah satu tantangan terbesar yang dihadapi oleh konsumen dan penjual dalam pasar ini adalah penentuan harga yang adil dan realistis. seringkali penentuan harga mobil bekas dilakukan secara subjektif dan berdasarkan pengalaman atau intuisi, yang tentu saja dapat menghasilkan harga yang tidak akurat. Kondisi ini sering kali merugikan pembeli yang ingin mendapatkan harga yang wajar, atau penjual yang ingin menjual mobil mereka dengan harga yang optimal. Oleh karena itu, diperlukan sebuah metode yang lebih objektif dan sistematis untuk memprediksi harga mobil bekas berdasarkan data yang ada
+    
+    Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
     """)
 st.divider()
 st.header('**Pengembangan Aplikasi**')
 st.write("""
-     Pada aplkasi ini terdapat model dengan metode regresi dengan algoritma Random Forest, yang dimana model tersebut dilatih menggunakan dataset yang berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas, yaitu:
+     Pada aplkasi ini terdapat model dengan metode regresi dengan algoritma Random Forest, yang dimana model tersebut dilatih menggunakan dataset yang berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas:
     """)
 df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
-st.dataframe(df)
-st.text("""
+with st.expander("Dataset"):
+  st.dataframe(df)
+  st.write("""
     Berikut penjelasan fitur yanga ada pada Dataset:
-    \nMake         : Merek mobil 
-    \nmodel        : Model spesifik dari merek tersebut  
-    \nyear         : Tahun produksi mobil.  
-    \nprice        : Harga jual mobil, dalam Poundsterling.    
-    \ntransmission : Tipe transmisi
-    \nmileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
-    \nfuelType     : Jenis bahan bakar.    
-    \ntax          : Pajak jalan tahunan dalam Poundsterling.
-    \nmpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
-    \nengineSize   : Ukuran mesin mobil dalam liter.
+    Make         : Merek mobil 
+    model        : Model spesifik dari merek tersebut  
+    year         : Tahun produksi mobil.  
+    price        : Harga jual mobil, dalam Poundsterling.    
+    transmission : Tipe transmisi
+    mileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
+    fuelType     : Jenis bahan bakar.    
+    tax          : Pajak jalan tahunan dalam Poundsterling.
+    mpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
+    engineSize   : Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
-col1, col2, col3 = st.columns(3)
-with col1:
-  st.metric("Jumlah Data", df.shape[0])
+st.metric("Jumlah Data", df.shape[0])
+col2, col3 = st.columns(2)
 with col2:
-  st.text("""
+  st.markdown("""
   Tipe Data Objek:
-  \nMake         : Merek mobil (misalnya Audi, BMW, Skoda, Ford, Volkswagen, Toyota, Hyundai). 
-  \nmodel        : Model spesifik dari merek tersebut (misalnya A3, Fiesta, Golf).  
-  \ntransmission : Tipe transmisi (Manual, Automatic, Semi-Auto).     
-  \nfuelType     : Jenis bahan bakar (Petrol, Diesel, Hybrid, Electric).
-  """)
+  :green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]""", unsafe_allow_html=True
+  )
 with col3:
-  st.text("""
-  Tipe Data Numerik:
-  \nyear         : Tahun produksi mobil.  
-  \nprice        : Harga jual mobil, dalam Poundsterling.    
-  \nmileage      : Jarak tempuh mobil, kemungkinan dalam satuan miles.    
-  \ntax          : Pajak jalan tahunan dalam Poundsterling.
-  \nmpg          : Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).
-  \nengineSize   : Ukuran mesin mobil dalam liter.
-  """)
+  st.markdown("""
+  Tipe Data Objek:
+  :green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]""", unsafe_allow_html=True
+  )
 
 
 
