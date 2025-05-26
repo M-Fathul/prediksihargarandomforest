@@ -47,16 +47,16 @@ st.metric("Jumlah Data", df.shape[0])
 col2, col3 = st.columns(2)
 with col2:
   labelojek = "Tipe Data Objek"
-  kolomobjek = st.markdown(":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]")
+  kolomobjek = ":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]"
   st.markdown(
-    '<div style="text-align: center;">{labelobjek}</div><div style="text-align: center;">{kolomobjek}</div>',
+    f'<div style="text-align: center;">{labelobjek}</div><div style="text-align: center;">{kolomobjek}</div>',
     unsafe_allow_html=True
   )
 with col3:
   labelnumerik = "Tipe Data Numerik"
-  kolomnumerik = st.markdown(":green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]")
+  kolomnumerik = ":green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]"
   st.markdown(
-    '<div style="text-align: center;">{labelnumerik}</div><div style="text-align: center;">{kolomnumerik}</div>',
+    f'<div style="text-align: center;">{labelnumerik}</div><div style="text-align: center;">{kolomnumerik}</div>',
     unsafe_allow_html=True
   )
 
