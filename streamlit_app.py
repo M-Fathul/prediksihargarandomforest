@@ -47,13 +47,17 @@ st.metric("Jumlah Data", df.shape[0])
 col2, col3 = st.columns(2)
 with col2:
   st.markdown(
-    f'<div style="text-align: center;">Tipe Data Objek</div><div style="text-align: center;">{st.badge("Make")} {st.badge("model")} {st.badge("transmission")} {st.badge("fuelType")}</div>',
+    '<div style="text-align: center;">Tipe Data Objek</div>',
     unsafe_allow_html=True
+  )
+  st.markdown(":green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]", unsafe_allow_html=True
   )
 with col3:
   st.markdown(
-    f'<div style="text-align: center;">Tipe Data Numerik</div><div style="text-align: center;">{st.badge("year")} {st.badge("price")} {st.badge("mileage")} {st.badge("tax")} {st.badge("mpg")} {st.badge("engineSize")}</div>',
+    '<div style="text-align: center;">Tipe Data Numerik</div>',
     unsafe_allow_html=True
+  )
+  st.markdown(":green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]", unsafe_allow_html=True
   )
 
 
