@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -52,14 +54,17 @@ colheatmap, penjelasan = st.columns(2)
 with colheatmap:
   st.write("Heatmap Korelasi")
   kor = df.select_dtypes(exclude=['object']).corr()
-  st.dataframe(kor)
+  sns.heatmap(kor, annot=True, cmap="coolwarm")
+  plt.title('Heatmap Korelasi')
+  plt.show()
 with penjelasan:
   st.text("""
   Heatmap ini menunjukkan hubungan linier antara berbagai fitur (variabel) dalam dataset mobil bekas. Nilai korelasi berkisar dari -1 hingga 1:
-  \n1 (merah gelap)\t\t: Korelasi positif sempurna. Jika satu variabel meningkat, yang lain juga cenderung meningkat.
-  \n0 (abu-abu/putih)\t: tidak berkorelasi
-  \n-1 (biru gelap)\t\t: Korelasi negatif sempurna. Jika satu variabel meningkat, yang lain cenderung menurun. sangat positif
-  Dari heatmap ini, kita bisa melihat bahwa faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
+  1 (merah gelap)\t\t: Korelasi positif sempurna. Jika satu variabel meningkat, yang lain juga cenderung meningkat.
+  0 (abu-abu/putih)\t: tidak berkorelasi
+  -1 (biru gelap)\t\t: Korelasi negatif sempurna. Jika satu variabel meningkat, yang lain cenderung menurun. sangat positif
+  
+  Dari heatmap ini, faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
   """)
 with st.sidebar:
   if 'Make' not in st.session_state:
