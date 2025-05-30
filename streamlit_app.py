@@ -50,23 +50,28 @@ with col3:
   st.metric("Jumlah Data", df.shape[0])
 
 st.subheader("Eksplorasi Data")
-colheatmap, penjelasan = st.columns(2)
+colheatmap, penjelasanheatmap = st.columns(2)
 with colheatmap:
-  st.write("Heatmap Korelasi")
   kor = df.select_dtypes(exclude=['object']).corr()
   fig, ax = plt.subplots()
   sns.heatmap(kor, annot=True, cmap="coolwarm", ax=ax)
+  plt.title("Heatmap Korelasi")
   st.pyplot(fig)
-  
-with penjelasan:
+with penjelasanheatmap:
   st.text("""
   Heatmap ini menunjukkan hubungan linier antara berbagai fitur (variabel) dalam dataset mobil bekas. Nilai korelasi berkisar dari -1 hingga 1:
-  1 (merah gelap)\t\t: Korelasi positif sempurna. Jika satu variabel meningkat, yang lain juga cenderung meningkat.
+  1 (merah gelap)\t: Jika satu variabel meningkat, yang lain juga cenderung meningkat.
   0 (abu-abu/putih)\t: tidak berkorelasi
-  -1 (biru gelap)\t\t: Korelasi negatif sempurna. Jika satu variabel meningkat, yang lain cenderung menurun. sangat positif
+  -1 (biru gelap)\t\t: Jika satu variabel meningkat, yang lain cenderung menurun. sangat positif
   
   Dari heatmap ini, faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
   """)
+st.write("Pada dataset terdapat fitur Make yang merupakan merek mobil, dan model yang merupakan model spesifik dari merek tersebut. Dengan begitu aplikasi ini bisa memprediksi harga mobil dari merek-merek berserta model yang ada pada dataset berikut distribusinya:")
+
+coldistribusi, penjelasandistribusi = st.columns(2)
+with coldistribusi:
+  st.bar_chart(df, x="Make", color="model", stack=False)
+
 with st.sidebar:
   if 'Make' not in st.session_state:
     st.session_state.Make = df['Make'].unique()[0]
