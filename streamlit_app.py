@@ -54,6 +54,7 @@ colheatmap, penjelasan = st.columns(2)
 with colheatmap:
   st.write("Heatmap Korelasi")
   kor = df.select_dtypes(exclude=['object']).corr()
+  fig, ax = plt.subplots()
   sns.heatmap(kor, annot=True, cmap="coolwarm")
   plt.title('Heatmap Korelasi')
   st.pyplot()
