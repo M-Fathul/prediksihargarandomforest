@@ -71,8 +71,6 @@ dftes = pd.DataFrame(
     {
         "Make": ["Roadmap", "Roadmap", "Roadmap", "Extras", "Extras", "Extras", "Issues"],
         "model": ["A", "B", "C", "D", "E", "F", "G"],
-        "stars": [random.randint(0, 1000) for _ in range(7)],
-        "views_history": [[random.randint(0, 5000) for _ in range(30)] for _ in range(7)],
     }
 )
 coldistribusi, penjelasandistribusi = st.columns(2)
