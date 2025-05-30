@@ -33,21 +33,34 @@ st.text("""
     Berikut penjelasan fitur yanga ada pada Dataset:\nMake\t\t\t: Merek mobil \nmodel\t\t\t: Model spesifik dari merek tersebut \nyear\t\t\t: Tahun produksi mobil.\nprice\t\t\t: Harga jual mobil, dalam Poundsterling.\ntransmission\t: Tipe transmisi\nmileage\t\t: Jarak tempuh mobil, kemungkinan dalam satuan miles.\nfuelType\t\t: Jenis bahan bakar.\ntax\t\t\t\t: Pajak jalan tahunan dalam Poundsterling.\nmpg\t\t\t: Miles per gallon (efisiensi konsumsi bahan bakar per satuan jarak miles).\nengineSize\t\t: Ukuran mesin mobil dalam liter.
     """)
 st.subheader("Informasi Dataset")
-col2, col3, col4 = st.columns(3)
-with col2:
+col1, col2, col3 = st.columns(3)
+with col1:
   st.markdown("""
   Tipe Data Objek:
   :green-badge[Make] :orange-badge[model] :gray-badge[transmission] :blue-badge[fuelType]
   """)
-with col3:
+with col2:
   st.markdown("""
   Tipe Data Numerik:
   :green-badge[year] :orange-badge[price] :gray-badge[mileage] :red-badge[tax] :violet-badge[mpg] :blue-badge[engineSize]
   """)
-with col4:
+with col3:
   st.metric("Jumlah Data", df.shape[0])
 
-
+st.subheader("Eksplorasi Data")
+colheatmap, penjelasan = st.columns(2)
+with colheatmap:
+  st.write("Heatmap Korelasi")
+  kor = df.select_dtypes(exclude=['object']).corr()
+  st.dataframe(kor)
+with penjelasan:
+  st.text("""
+  Heatmap ini menunjukkan hubungan linier antara berbagai fitur (variabel) dalam dataset mobil bekas. Nilai korelasi berkisar dari -1 hingga 1:
+  \n1 (merah gelap)\t\t: Korelasi positif sempurna. Jika satu variabel meningkat, yang lain juga cenderung meningkat.
+  \n0 (abu-abu/putih)\t: tidak berkorelasi
+  \n-1 (biru gelap)\t\t: Korelasi negatif sempurna. Jika satu variabel meningkat, yang lain cenderung menurun. sangat positif
+  Dari heatmap ini, kita bisa melihat bahwa faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
+  """)
 with st.sidebar:
   if 'Make' not in st.session_state:
     st.session_state.Make = df['Make'].unique()[0]
