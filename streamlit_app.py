@@ -67,17 +67,17 @@ with penjelasanheatmap:
   Dari heatmap ini, faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
   """)
 st.write("Pada dataset terdapat fitur Make yang merupakan merek mobil, dan model yang merupakan model spesifik dari merek tersebut. Dengan begitu aplikasi ini bisa memprediksi harga mobil dari merek-merek berserta model yang ada pada dataset berikut distribusinya:")
-chart_data = pd.DataFrame(
-    {
-        "col1": list(range(20)),
-        "col2": np.random.randn(20),
-        "col3": np.random.randn(20),
-    }
-)
+dftes = pd.DataFrame({'kategori': ['A', 'B', 'A', 'C', 'B', 'A']})
+
+# Hitung value count
+counts = dftes['kategori'].value_counts()
+
+# Tampilkan bar chart
+st.bar_chart(counts)
 st.dataframe(chart_data)
 coldistribusi, penjelasandistribusi = st.columns(2)
 with coldistribusi:
-  st.bar_chart(dftes, x="Make", y="yield", color="model", stack=True)
+  # st.bar_chart(df, x="Make", y="yield", color="model", stack=True)
 
 with st.sidebar:
   if 'Make' not in st.session_state:
