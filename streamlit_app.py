@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -54,9 +54,7 @@ colheatmap, penjelasan = st.columns(2)
 with colheatmap:
   st.write("Heatmap Korelasi")
   kor = df.select_dtypes(exclude=['object']).corr()
-  sns.heatmap(kor, annot=True, cmap="coolwarm")
-  plt.title('Heatmap Korelasi')
-  plt.show()
+  st.write(sns.heatmap(kor, annot=True, cmap="coolwarm"))
 with penjelasan:
   st.text("""
   Heatmap ini menunjukkan hubungan linier antara berbagai fitur (variabel) dalam dataset mobil bekas. Nilai korelasi berkisar dari -1 hingga 1:
