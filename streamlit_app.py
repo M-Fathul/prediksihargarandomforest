@@ -70,7 +70,7 @@ st.write("Pada dataset terdapat fitur Make yang merupakan merek mobil, dan model
 
 coldistribusi, penjelasandistribusi = st.columns(2)
 with coldistribusi:
-  st.bar_chart(df, x="Make", color="model", stack=False)
+  st.bar_chart(df, x="Make", y="model", color="site")
 
 with st.sidebar:
   if 'Make' not in st.session_state:
