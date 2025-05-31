@@ -74,7 +74,7 @@ counts = dftes['kategori'].value_counts()
 
 # Tampilkan bar chart
 st.bar_chart(counts)
-st.dataframe(chart_data)
+st.dataframe(counts)
 # coldistribusi, penjelasandistribusi = st.columns(2)
 # with coldistribusi:
 #   # st.bar_chart(df, x="Make", y="yield", color="model", stack=True)
