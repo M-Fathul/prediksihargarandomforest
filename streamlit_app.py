@@ -67,34 +67,104 @@ with penjelasanheatmap:
   Dari heatmap ini, faktor-faktor seperti usia mobil (year) dan jarak tempuh (mileage) adalah prediktor kuat untuk harga (price) mobil bekas. Semakin tua dan semakin tinggi jarak tempuh, semakin rendah harganya. Selain itu, ukuran mesin (engineSize) juga memiliki pengaruh positif pada harga dan cenderung berkorelasi negatif dengan efisiensi bahan bakar (mpg) serta sedikit positif dengan pajak (tax).
   """)
 st.write("Pada dataset terdapat fitur Make yang merupakan merek mobil, dan model yang merupakan model spesifik dari merek tersebut. Dengan begitu aplikasi ini bisa memprediksi harga mobil dari merek-merek berserta model yang ada pada dataset berikut distribusinya:")
-dftes = pd.DataFrame({'kategori': ['A', 'B', 'A', 'C', 'B', 'A']})
+st.html("""
+    <h3>\nMerek mobil yang ada dalam dataset dan distribusinya:</h3>
+    """)
+jumlahmerek = df['Make'].value_counts()
+st.bar_chart(jumlahmerek)
+st.html("""
+    <h3>\nModel pada merek Audi yang ada dalam dataset dan distribusinya:</h3>
+    """)
 audi_df = df[df['Make'] == 'audi']
-
-# Hitung value count
 countsaudi = audi_df['model'].value_counts()
-
-# Tampilkan bar chart
 st.bar_chart(countsaudi)
-st.dataframe(countsaudi)
-# coldistribusi, penjelasandistribusi = st.columns(2)
-# with coldistribusi:
-#   # st.bar_chart(df, x="Make", y="yield", color="model", stack=True)
-data = pd.DataFrame({
-    'kategori': ['A', 'A', 'A', 'A', 'A', 'A', 'C', 'C', 'B'],
-    'sub-kategori': ['1', '2', '1', '2', '3', '4', '5', '6', '7'],
-})
 
-# Hitung jumlah kemunculan setiap kombinasi kategori dan sub-kategori
-agg = data.groupby(['kategori', 'sub-kategori']).size().reset_index(name='count')
+st.html("""
+    <h3>\nModel pada merek BMW yang ada dalam dataset dan distribusinya:</h3>
+    """)
+BMW_df = df[df['Make'] == 'BMW']
+countsBMW = BMW_df['model'].value_counts()
+st.bar_chart(countBMW)
 
-# Tampilkan bar chart
-st.bar_chart(
-    agg,
-    x="kategori",
-    y="count",
-    color="sub-kategori",
-    stack=False
-)
+st.html("""
+    <h3>\nModel pada merek Ford yang ada dalam dataset dan distribusinya:</h3>
+    """)
+Ford_df = df[df['Make'] == 'Ford']
+countsFord = Ford_df['model'].value_counts()
+st.bar_chart(countsFord)
+
+st.html("""
+    <h3>\nModel pada merek VW yang ada dalam dataset dan distribusinya:</h3>
+    """)
+vw_df = df[df['Make'] == 'vw']
+countsvw = vw_df['model'].value_counts()
+st.bar_chart(countsvw)
+
+st.html("""
+    <h3>\nModel pada merek Toyota yang ada dalam dataset dan distribusinya:</h3>
+    """)
+Toyota_df = df[df['Make'] == 'toyota']
+countsToyota = Toyota_df['model'].value_counts()
+st.bar_chart(countsToyota)
+
+st.html("""
+    <h3>\nModel pada merek Skoda yang ada dalam dataset dan distribusinya:</h3>
+    """)
+Skoda_df = df[df['Make'] == 'skoda']
+countsSkoda = Skoda_df['model'].value_counts()
+st.bar_chart(countsSkoda)
+
+st.html("""
+    <h3>\nModel pada merek Hyundai yang ada dalam dataset dan distribusinya:</h3>
+    """)
+Hyundai_df = df[df['Make'] == 'Hyundai']
+countsHyundai = Hyundai_df['model'].value_counts()
+st.bar_chart(countsHyundai)
+
+spek1, spek2 = st.columns(2)
+with spek1:
+  st.html("""
+    <h3>\nDistribusi spesifikasi tahun mobil:</h3>
+    """)
+  jumlahyear = df['year'].value_counts()
+  st.bar_chart(jumlahyear)
+  st.html("""
+    <h3>\nDistribusi spesifikasi mileage mobil:</h3>
+    """)
+  jumlahmileage = df['mileage'].value_counts()
+  st.bar_chart(jumlahmileage)
+  st.html("""
+    <h3>\nDistribusi spesifikasi mpg mobil:</h3>
+    """)
+  jumlahmpg = df['mpg'].value_counts()
+  st.bar_chart(jumlahmpg)
+  st.html("""
+    <h3>\nDistribusi spesifikasi transmisi mobil:</h3>
+    """)
+  jumlahtransmission = df['transmission'].value_counts()
+  st.bar_chart(jumlahtransmission)
+with spek2:
+  st.html("""
+    <h3>\nDistribusi spesifikasi harga mobil:</h3>
+    """)
+  jumlahprice = df['price'].value_counts()
+  st.bar_chart(jumlahprice)
+  st.html("""
+    <h3>\nDistribusi spesifikasi pajak mobil:</h3>
+    """)
+  jumlahtax = df['tax'].value_counts()
+  st.bar_chart(jumlahtax)
+  st.html("""
+    <h3>\nDistribusi spesifikasi ukuran mesin mobil:</h3>
+    """)
+  jumlahenginesize = df['enginesize'].value_counts()
+  st.bar_chart(jumlahenginesize)
+  st.html("""
+    <h3>\nDistribusi spesifikasi jenis bahan bakar mobil:</h3>
+    """)
+  jumlahfueltype = df['fueltype'].value_counts()
+  st.bar_chart(jumlahfueltype)
+
 with st.sidebar:
   if 'Make' not in st.session_state:
     st.session_state.Make = df['Make'].unique()[0]
