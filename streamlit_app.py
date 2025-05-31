@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
-
+df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
 st.set_page_config(
     page_title="Prediksi Harga Mobil Bekas UK",
     page_icon="🚘",
@@ -53,7 +53,7 @@ st.header('**Pengembangan Aplikasi**')
 st.write("""
      Pada aplkasi ini terdapat model dengan metode regresi dengan algoritma Random Forest, yang dimana model tersebut dilatih menggunakan dataset yang berisi beberapa kolom yang memberikan informasi detail tentang mobil bekas:
     """)
-df = pd.read_csv('https://raw.githubusercontent.com/M-Fathul/startingML/refs/heads/master/cars_dataset.csv', sep=',')
+
 with st.expander("Dataset"):
   st.dataframe(df)
 st.text("""
