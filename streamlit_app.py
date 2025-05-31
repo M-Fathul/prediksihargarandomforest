@@ -23,6 +23,31 @@ st.write("""
     
     Aplikasi ini bertujuan untuk memprediksi harga mobil bekas di UK berdasarkan beberapa fitur yang ada di dataset menerapkan algoritma Random Forest dalam prediksi harga mobil bekas di pasar Inggris menggunakan dataset yang mencakup berbagai fitur kendaraan seperti merek, model, tahun pembuatan, mileage, ukuran mesin, dan jenis bahan bakar. Melalui aplikasi ini, diharapkan dapat memanfaatkan model yang dapat memberikan prediksi harga yang akurat dan efisien, serta lebih mudah diakses oleh konsumen dan penjual. Hal ini akan bermanfaat tidak hanya bagi pembeli dan penjual, tetapi juga bagi perusahaan otomotif, dealer mobil bekas, serta platform jual beli mobil yang semakin berkembang.
     """)
+@st.dialog("Masukan Spesifikasi Mobil")
+def prediksi():
+    if 'Make' not in st.session_state:
+      st.session_state.Make = df['Make'].unique()[0]
+    if 'model' not in st.session_state:
+      st.session_state.model = df[df['Make'] == st.session_state.Make]['model'].unique()[0]
+    st.session_state.Make = st.selectbox('Make', df['Make'].unique(), key='Make_select')
+    filtered_models = df[df['Make'] == st.session_state.Make]['model'].unique()
+    st.session_state.model = st.selectbox('Model', filtered_models, key='model_select')
+    year = st.number_input('Tahun Beli', df['year'].min(), df['year'].max(), 2017)
+    transmission = st.selectbox('Transmisi', df['transmission'].unique())
+    fuelType = st.selectbox('Bahan Bakar', df['fuelType'].unique())
+    engineSize = st.number_input('Ukuran Mesin', df['engineSize'].min(), df['engineSize'].max(), 1.4)
+    mileage = st.number_input('Jarak Tempuh', df['mileage'].min(), df['mileage'].max(), 15735)
+    mpg = st.number_input('Kapasitas Bahan Bakar', df['mpg'].min(), df['mpg'].max(), 55.4)
+    tax = st.number_input('Pajak', df['tax'].min(), df['tax'].max(), 150.0)
+    price = 0
+    prediksi = 0
+    # if st.button("prediksi harga"):
+    #     st.session_state.vote = {"item": item, "reason": reason}
+    #     st.rerun()
+
+if st.button("Prediksi Harga Mobil Bekas Anda"):
+  prediksi()
+
 st.divider()
 st.header('**Pengembangan Aplikasi**')
 st.write("""
@@ -77,49 +102,49 @@ st.html("""
     """)
 audi_df = df[df['Make'] == 'audi']
 countsaudi = audi_df['model'].value_counts()
-st.bar_chart(countsaudi)
+st.bar_chart(countsaudi, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek BMW yang ada dalam dataset dan distribusinya:</h3>
     """)
 BMW_df = df[df['Make'] == 'BMW']
 countsBMW = BMW_df['model'].value_counts()
-st.bar_chart(countBMW)
+st.bar_chart(countsBMW, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek Ford yang ada dalam dataset dan distribusinya:</h3>
     """)
 Ford_df = df[df['Make'] == 'Ford']
 countsFord = Ford_df['model'].value_counts()
-st.bar_chart(countsFord)
+st.bar_chart(countsFord, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek VW yang ada dalam dataset dan distribusinya:</h3>
     """)
 vw_df = df[df['Make'] == 'vw']
 countsvw = vw_df['model'].value_counts()
-st.bar_chart(countsvw)
+st.bar_chart(countsvw, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek Toyota yang ada dalam dataset dan distribusinya:</h3>
     """)
 Toyota_df = df[df['Make'] == 'toyota']
 countsToyota = Toyota_df['model'].value_counts()
-st.bar_chart(countsToyota)
+st.bar_chart(countsToyota, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek Skoda yang ada dalam dataset dan distribusinya:</h3>
     """)
 Skoda_df = df[df['Make'] == 'skoda']
 countsSkoda = Skoda_df['model'].value_counts()
-st.bar_chart(countsSkoda)
+st.bar_chart(countsSkoda, horizontal=True)
 
 st.html("""
     <h3>\nModel pada merek Hyundai yang ada dalam dataset dan distribusinya:</h3>
     """)
 Hyundai_df = df[df['Make'] == 'Hyundai']
 countsHyundai = Hyundai_df['model'].value_counts()
-st.bar_chart(countsHyundai)
+st.bar_chart(countsHyundai, horizontal=True)
 
 spek1, spek2 = st.columns(2)
 with spek1:
