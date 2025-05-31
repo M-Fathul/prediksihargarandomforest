@@ -68,13 +68,14 @@ with penjelasanheatmap:
   """)
 st.write("Pada dataset terdapat fitur Make yang merupakan merek mobil, dan model yang merupakan model spesifik dari merek tersebut. Dengan begitu aplikasi ini bisa memprediksi harga mobil dari merek-merek berserta model yang ada pada dataset berikut distribusinya:")
 dftes = pd.DataFrame({'kategori': ['A', 'B', 'A', 'C', 'B', 'A']})
+audi_df = df[df['Make'] == 'audi']
 
 # Hitung value count
-counts = dftes['kategori'].value_counts()
+countsaudi = audi_df['model'].value_counts()
 
 # Tampilkan bar chart
-st.bar_chart(counts)
-st.dataframe(counts)
+st.bar_chart(countsaudi)
+st.dataframe(countsaudi)
 # coldistribusi, penjelasandistribusi = st.columns(2)
 # with coldistribusi:
 #   # st.bar_chart(df, x="Make", y="yield", color="model", stack=True)
