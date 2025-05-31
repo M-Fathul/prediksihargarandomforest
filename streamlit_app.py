@@ -79,7 +79,22 @@ st.dataframe(countsaudi)
 # coldistribusi, penjelasandistribusi = st.columns(2)
 # with coldistribusi:
 #   # st.bar_chart(df, x="Make", y="yield", color="model", stack=True)
+data = pd.DataFrame({
+    'kategori': ['A', 'A', 'A', 'A', 'A', 'A', 'C', 'C', 'B'],
+    'sub-kategori': ['1', '2', '1', '2', '3', '4', '5', '6', '7'],
+})
 
+# Hitung jumlah kemunculan setiap kombinasi kategori dan sub-kategori
+agg = data.groupby(['kategori', 'sub-kategori']).size().reset_index(name='count')
+
+# Tampilkan bar chart
+st.bar_chart(
+    agg,
+    x="kategori",
+    y="count",
+    color="sub-kategori",
+    stack=False
+)
 with st.sidebar:
   if 'Make' not in st.session_state:
     st.session_state.Make = df['Make'].unique()[0]
