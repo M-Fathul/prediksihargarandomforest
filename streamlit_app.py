@@ -182,7 +182,7 @@ with spek2:
   st.html("""
     <h3>\nDistribusi spesifikasi ukuran mesin mobil:</h3>
     """)
-  jumlahenginesize = df['enginesize'].value_counts()
+  jumlahenginesize = df['engineSize'].value_counts()
   st.bar_chart(jumlahenginesize)
   st.html("""
     <h3>\nDistribusi spesifikasi jenis bahan bakar mobil:</h3>
